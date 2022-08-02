@@ -53,7 +53,6 @@ const filterTransactions = (array) => {
       arrForConfig.push(transaction.hash);
     }
   });
-  console.log(arrForConfig);
   return arr;
 };
 

@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.options("*", cors());
 
-app.use(utils.checkForConfiguration);
+// app.use(utils.checkForConfiguration);
 
 app.use("/", routes);
 

@@ -5,8 +5,11 @@ const configurationCache = require("../cache/configurationCache");
 const logger = require("../config/logger");
 
 const getConfigurations = async () => {
-  const res = await Configuration.find({});
-  return res;
+  return Configuration.find({});
+};
+
+const getConfiguration = async (id) => {
+  return Configuration.findById(id);
 };
 
 const createConfiguration = async (body) => {
@@ -23,4 +26,4 @@ const createConfiguration = async (body) => {
   return newConfig;
 };
 
-module.exports = { getConfigurations, createConfiguration };
+module.exports = { getConfigurations, createConfiguration, getConfiguration };

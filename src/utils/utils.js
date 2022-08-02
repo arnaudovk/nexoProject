@@ -20,15 +20,12 @@ const setInitialCache = async () => {
 };
 
 const checkForConfiguration = function (req, res, next) {
-  next();
-  res.on("finish", function () {
-    if (!configurationCache.isEmpty()) {
-      if (configurationCache.getIsFirstRequest() === true) {
-        configurationCache.setIsFirstRequest(false);
-        watchEth();
-      }
+  if (!configurationCache.isEmpty()) {
+    if (configurationCache.getIsFirstRequest() === true) {
+      configurationCache.setIsFirstRequest(false);
+      watchEth();
     }
-  });
+  }
 };
 
 module.exports = { setInitialCache, checkForConfiguration };

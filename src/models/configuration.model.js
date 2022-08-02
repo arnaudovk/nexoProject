@@ -18,7 +18,7 @@ const configurationSchema = mongoose.Schema({
   valueBelow: { type: Number },
   type: { type: Number },
   current: { type: Boolean, default: false, private: true },
-  transactions: [{ type: mongoose.Types.ObjectId, ref: "Transaction" }],
+  transactions: [{ any: mongoose.Mixed }],
 });
 
 configurationSchema.plugin(toJSON);

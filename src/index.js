@@ -13,6 +13,7 @@ mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
     logger.info(`Listening to port ${config.port}`);
     await utils.setInitialCache();
     if (!configurationCache.isEmpty()) {
+      configurationCache.setIsFirstRequest(false);
       ethWatcher();
     }
   });

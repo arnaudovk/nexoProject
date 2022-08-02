@@ -10,8 +10,28 @@ const handleTransactions = async (array) => {
     `Transactions matching configuration: ${filteredTransactions.length}`
   );
   if (filteredTransactions.length) {
-    await Transaction.insertMany(filteredTransactions);
+    Transaction.insertMany(filteredTransactions).then(async (result) => {
+      const curr = await Configuration.findById(configurationCache.getId());
+      result.forEach((transaction) => {
+        const obj = { id: transaction.id, hash: transaction.hash };
+        curr.transactions.push(obj);
+      });
+      await curr.save();
+    });
   }
 };
 
-module.exports = { filterTransactions, handleTransactions };
+const getTransactions = async (filter, options) => {
+  return Transaction.paginate(filter, options);
+};
+
+const getTransaction = async (id) => {
+  return Transaction.findById(id);
+};
+
+module.exports = {
+  filterTransactions,
+  handleTransactions,
+  getTransactions,
+  getTransaction,
+};
