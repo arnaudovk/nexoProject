@@ -1,6 +1,23 @@
-version: '3.7'
+version: '3.4'
 
 services:
+  nexoproject:
+    image: nexoproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URL=mongodb://mongodb:27017
+      - PORT=3000
+      - INFURA_KEY=f63b1591f2404c6da81473f94695c9ff
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    links:
+      - mongodb
+
   mongodb:
     image: mongo:latest
     ports:
@@ -13,5 +30,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+
 volumes:
   data:
+
