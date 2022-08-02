@@ -8,7 +8,7 @@ A simple app that monitors all Ehereum transactions and stores them based on a d
 4. npm
 
 ## Quick Start
-1. create an .env file in the root directory with: 
+1. create a .env file in the root directory with: 
 
 ```
 MONGODB_URL=mongodb://localhost:27017
