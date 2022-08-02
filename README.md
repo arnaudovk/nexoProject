@@ -1,6 +1,8 @@
 # EthWatcher
 
-A simple app that monitors all Ehereum transactions and stores them based on a dynamic configuration.
+A simple app that monitors all Ehereum transactions and stores them based on a dynamic configuration. 
+
+You can test the app by sending your requests to http://46.101.209.21
 
 ## Prerequisites
 1. docker cli
