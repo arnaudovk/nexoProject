@@ -8,36 +8,42 @@ A simple app that monitors all Ehereum transactions and stores them based on a d
 4. npm
 
 ## Quick Start
-1. create a .env file in the root directory with: 
+1. 
+```bash
+npm install
+```
+2. create a .env file in the root directory with: 
 
 ```
 MONGODB_URL=mongodb://localhost:27017
 PORT=3000
 INFURA_KEY=<YOUR-INFURA-KEY>
 ```
-2. start the database
+3. start the database
 ```bash
 docker-compose start mongodb
 ```
-2. start the application
+4. start the application
 ```bash
 npm run dev
 ```
 ### OR
 
 
-1.  set your infura key in the environment variables in the docker-compose.yaml file
+2.  set your infura key in the environment variables in the docker-compose.yaml file
 
-2.
+3.
 ```bash
 docker-compose up
 ```
 
-### API Endpoints
+### Warning
 
-List of available routes:
+If starting the app for the first time (DB is empty), at least one configuration has to be set. Only then can the application start monitoring the Eth network.
 
-**Auth routes**:\
+
+
+### List of available routes 
 `GET /transaction` - get all the transactions; filter by query parameters: [configuration, value...]\
 `GET /transaction/:id` - get transaction by id\
 `GET /configurations` - get all the configurations; filter by query parameter: `current`\
