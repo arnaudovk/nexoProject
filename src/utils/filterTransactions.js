@@ -3,7 +3,6 @@ const web3 = require("web3");
 
 const filterTransactions = (array) => {
   const arr = [];
-  const arrForConfig = [];
   array.forEach((transaction) => {
     let matches = true;
     Object.keys(configurationCache.getCacheData()).forEach((key) => {
@@ -50,7 +49,6 @@ const filterTransactions = (array) => {
     if (matches) {
       transaction.configuration = configurationCache.getId();
       arr.push(transaction);
-      arrForConfig.push(transaction.hash);
     }
   });
   return arr;

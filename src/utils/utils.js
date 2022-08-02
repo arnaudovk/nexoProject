@@ -2,6 +2,7 @@ const { Configuration } = require("../models");
 const configurationCache = require("../cache/configurationCache");
 const logger = require("../config/logger");
 const watchEth = require("../ethWatcher/watcher");
+
 const setInitialCache = async () => {
   const currConfig = await Configuration.findOne({ current: true });
   if (currConfig) {

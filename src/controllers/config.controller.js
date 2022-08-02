@@ -2,12 +2,13 @@ const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { configService } = require("../services");
-const configurationCache = require("../cache/configurationCache");
-const logger = require("../config/logger");
 const utils = require("../utils/utils");
+const pick = require("../utils/pick");
 
 const getConfigurations = catchAsync(async (req, res) => {
-  const config = await configService.getConfigurations();
+  const options = pick(req.query, ["limit", "page"]);
+  const filter = pick(req.query, ["current"]);
+  const config = await configService.getConfigurations(filter, options);
   res.send(config);
 });
 
@@ -25,4 +26,8 @@ const createConfiguration = catchAsync(async (req, res) => {
   res.on("finish", utils.checkForConfiguration);
 });
 
-module.exports = { getConfigurations, createConfiguration, getConfiguration };
+module.exports = {
+  getConfigurations,
+  createConfiguration,
+  getConfiguration,
+};

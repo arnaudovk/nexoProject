@@ -1,11 +1,9 @@
-const httpStatus = require("http-status");
 const { Configuration } = require("../models");
-const ApiError = require("../utils/ApiError");
 const configurationCache = require("../cache/configurationCache");
 const logger = require("../config/logger");
 
-const getConfigurations = async () => {
-  return Configuration.find({});
+const getConfigurations = async (filter, options) => {
+  return Configuration.paginate(filter, options);
 };
 
 const getConfiguration = async (id) => {
@@ -26,4 +24,8 @@ const createConfiguration = async (body) => {
   return newConfig;
 };
 
-module.exports = { getConfigurations, createConfiguration, getConfiguration };
+module.exports = {
+  getConfigurations,
+  createConfiguration,
+  getConfiguration,
+};

@@ -7,7 +7,6 @@ const ApiError = require("./utils/ApiError");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const config = require("./config/config");
 const morgan = require("./config/morgan");
-const utils = require("./utils/utils");
 
 const app = express();
 
@@ -23,8 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.options("*", cors());
 
-// app.use(utils.checkForConfiguration);
-
 app.use("/", routes);
 
 app.use((req, res, next) => {
@@ -33,7 +30,6 @@ app.use((req, res, next) => {
 
 app.use(errorConverter);
 
-// handle error
 app.use(errorHandler);
 
 module.exports = app;

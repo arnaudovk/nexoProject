@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 
 const configurationSchema = mongoose.Schema({
   from: {
@@ -18,10 +18,16 @@ const configurationSchema = mongoose.Schema({
   valueBelow: { type: Number },
   type: { type: Number },
   current: { type: Boolean, default: false, private: true },
-  transactions: [{ any: mongoose.Mixed }],
+  // If we need to store each thHash in the configuration
+  // transactions: [
+  //   {
+  //     hash: { type: String, ref: "Transaction" },
+  //   },
+  // ],
 });
 
 configurationSchema.plugin(toJSON);
+configurationSchema.plugin(paginate);
 
 const Configuration = mongoose.model("Configuration", configurationSchema);
 

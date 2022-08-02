@@ -10,7 +10,7 @@ const watchEth = () => {
   const ws = new WebSocket(url);
 
   ws.on("open", function open() {
-    logger.info("Connection with infura open!");
+    logger.info("Watching transactions!");
     ws.send(
       '{"jsonrpc":"2.0","method":"eth_subscribe","params":["newHeads"], "id":1}'
     );
@@ -29,12 +29,11 @@ const watchEth = () => {
         );
       }, 3000);
     } else if (obj?.result?.transactions) {
-      logger.info(
-        `Transactions for block ${web3.utils.hexToNumber(
-          obj.result.number
-        )} received!`
+      const blockNumber = web3.utils.hexToNumber(obj.result.number);
+      await transService.handleTransactions(
+        obj.result.transactions,
+        blockNumber
       );
-      await transService.handleTransactions(obj.result.transactions);
     }
   });
 

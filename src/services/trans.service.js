@@ -1,24 +1,21 @@
-const configurationCache = require("../cache/configurationCache");
-const web3 = require("web3");
 const logger = require("../config/logger");
 const { filterTransactions } = require("../utils/filterTransactions");
-const { Transaction, Configuration } = require("../models");
+const { Transaction } = require("../models");
 
-const handleTransactions = async (array) => {
+const handleTransactions = async (array, blockNumber) => {
   const filteredTransactions = filterTransactions(array);
-  logger.info(
-    `Transactions matching configuration: ${filteredTransactions.length}`
-  );
   if (filteredTransactions.length) {
-    Transaction.insertMany(filteredTransactions).then(async (result) => {
-      const curr = await Configuration.findById(configurationCache.getId());
-      result.forEach((transaction) => {
-        const obj = { id: transaction.id, hash: transaction.hash };
-        curr.transactions.push(obj);
-      });
-      await curr.save();
-    });
+    Transaction.insertMany(filteredTransactions);
+    // If we need to store each thHash in the configuration
+    // .then(async (result) => {
+    //   const curr = await Configuration.findById(configurationCache.getId());
+    //   curr.transactions = curr.transactions.concat(result);
+    //   await curr.save();
+    // });
   }
+  logger.info(
+    `${filteredTransactions.length} transactions from block ${blockNumber} saved. `
+  );
 };
 
 const getTransactions = async (filter, options) => {
