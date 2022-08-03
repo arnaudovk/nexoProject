@@ -46,8 +46,8 @@ If starting the app for the first time (DB is empty), at least one configuration
 
 
 ### List of available routes 
-`GET /transaction` - get all the transactions; filter by query parameters: [configuration, value...]\
-`GET /transaction/:id` - get transaction by id\
+`GET /transactions` - get all the transactions; filter by query parameters: [configuration, value...]\
+`GET /transactions/:id` - get transaction by id\
 `GET /configurations` - get all the configurations; filter by query parameter: `current`\
 `GET /configurations/:id` - get configuration by id\
 `POST /configurations` - set new configuration\
