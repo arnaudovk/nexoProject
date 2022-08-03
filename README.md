@@ -54,7 +54,7 @@ If starting the app for the first time (DB is empty), at least one configuration
 
 **Data schemas**
 
-You can set a new configuration by passing an object with any or all of the parameters in these request body:
+You can set a new configuration by passing an object with any or all of the parameters in the request body:
 
 ```JSON
 {
@@ -62,8 +62,8 @@ You can set a new configuration by passing an object with any or all of the para
     "to": "42-character hexadecimal address",
     "gas": "Integer",
     "value": "Integer(in Eth)",
-    "valueAbove": "Integer(in Eth) - will store all transactions above this value",
-    "valueBelow": "Integer(in Eth) - will store all transactions below this value",
+    "valueAbove": "Integer(in Eth) - will store all transactions with value above this",
+    "valueBelow": "Integer(in Eth) - will store all transactionswith value below this",
     "type": "Integer"
 }
 ```
